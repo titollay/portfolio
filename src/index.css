@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-black-han: "Black Han Sans", sans-serif;
+  --font-averia: "Averia Serif Libre", serif;
+  
+  --animate-ticker-scroll: ticker-scroll 18s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes ticker-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html, body, #root {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f3f3f3;
+    overflow-x: clip;
+    font-family: var(--font-averia);
+    
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f3f3f3; 
+}
+::-webkit-scrollbar-thumb {
+  background: #111; 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333; 
+}
+
+.hero-wave:hover .hero-img {
+  transform: scale(1.04) translateY(-10px);
+}
+.fillText {
+    -webkit-text-stroke: 1px black;
+    color: transparent;
+    background: linear-gradient(90deg,black 50%,transparent 50%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
