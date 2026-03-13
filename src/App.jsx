@@ -17,9 +17,20 @@ import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 function AppContent() {
   const { t } = useLanguage();
-  const topWords = [t('hero.tagline') + ' ', t('hero.branding') + ' ', t('hero.productDesign') + ' ', t('hero.webDesign') + ' ', t('hero.marketing') + ' '];
-  const botWords = [t('hero.webDesign') + ' ', t('hero.productDesign') + ' ', t('hero.branding') + ' ', t('hero.marketing') + ' '];
+  const topWords = [
+  t('hero.tagline') + ' ',
+  t('hero.webDev') + ' ',
+  t('hero.uxui') + ' ',
+  t('hero.branding') + ' ',
+  t('hero.marketingDigital') + ' '
+];
 
+const botWords = [
+  t('hero.webDev') + ' ',
+  t('hero.uxui') + ' ',
+  t('hero.branding') + ' ',
+  t('hero.marketingDigital') + ' '
+];
   return (
     <>
       <PageTransition />

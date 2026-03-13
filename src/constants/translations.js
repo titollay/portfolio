@@ -7,13 +7,14 @@ export const translations = {
       skills: "Skills",
       contact: "Contact",
     },
-    hero: {
-      tagline: "I USUALLY JUST SIMPLY COOK",
+  hero: {
+      tagline: "I BUILD DIGITAL EXPERIENCES",
+      webDev: "WEB DEVELOPMENT",
+      uxui: "UX/UI DESIGN",
       branding: "BRANDING",
-      productDesign: "PRODUCT DESIGN",
-      webDesign: "WEB DESIGN",
-      marketing: "MARKETING",
+      marketingDigital: "DIGITAL MARKETING",
     },
+  
     projects: {
       title: "Selected Works",
     },
@@ -47,13 +48,16 @@ export const translations = {
       skills: "Compétences",
       contact: "Contact",
     },
+    
     hero: {
-      tagline: "JE CUISINE TOUT SIMPLEMENT",
+      tagline: "JE CRÉE DES EXPÉRIENCES NUMÉRIQUES",
+      webDev: "DÉVELOPPEMENT WEB",
+      uxui: "UX/UI DESIGN",
       branding: "BRANDING",
-      productDesign: "DESIGN PRODUIT",
-      webDesign: "DESIGN WEB",
-      marketing: "MARKETING",
+      marketingDigital: "MARKETING DIGITAL",
     },
+  
+  
     projects: {
       title: "Projets Sélectionnés",
     },
