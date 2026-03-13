@@ -98,24 +98,34 @@ export default function SelectedWorks() {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="group block relative flex items-center justify-between py-12 border-b border-[#111]/20 cursor-pointer transition-colors duration-500 hover:bg-[#111] hover:text-[#f3f3f3] px-8 -mx-8"
+            className="group block relative flex flex-col md:flex-row md:items-center justify-between py-12 md:py-20 border-b border-[#111]/20 cursor-pointer transition-colors duration-500 hover:bg-[#111] hover:text-[#f3f3f3] px-8 -mx-8 gap-6 md:gap-0"
             onMouseEnter={() => setActiveProject(index)}
             onMouseLeave={() => setActiveProject(null)}
           >
-            <h3 className="text-[clamp(2rem,6vw,6rem)] font-[800] uppercase leading-none mix-blend-difference z-[11] relative">
+            {/* Mobile Card Image */}
+            <div className="md:hidden w-full aspect-[16/9] overflow-hidden rounded-xl mb-4 relative shadow-lg">
+               <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
+            </div>
+
+            <h3 className="text-[clamp(1.5rem,6vw,6rem)] font-[800] uppercase leading-none md:mix-blend-difference z-[11] relative">
               {project.title}
             </h3>
 
-            <span className="text-sm md:text-lg tracking-widest font-medium z-[11] relative">
+            <span className="text-sm md:text-lg tracking-widest font-medium z-[11] relative opacity-60 md:opacity-100 uppercase">
               {project.category}
             </span>
           </a>
         ))}
       </motion.div>
 
-      {/* Floating preview image */}
+      {/* Floating preview image (Desktop Only) */}
       <motion.div
-        className="absolute top-0 left-0 w-[420px] aspect-[4/3] pointer-events-none z-20 overflow-hidden rounded-xl shadow-2xl"
+        className="hidden md:block absolute top-0 left-0 w-[420px] aspect-[4/3] pointer-events-none z-20 overflow-hidden rounded-xl shadow-2xl"
         style={{
           x: mouseX,
           y: mouseY,

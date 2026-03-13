@@ -24,7 +24,8 @@ const textBlocks = [
 ];
 
 function Parallax2() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const cvHref = language === 'en' ? "/taha-allay-en.pdf" : "/taha-allay-fr.pdf";
   const ref = useRef();
 
   const { scrollYProgress } = useScroll({
@@ -60,97 +61,97 @@ function Parallax2() {
     [0, 1],
     ["-100px", "100px"]
   );
-  
-  return (
-    <>
-      <section
-        
-        data-index={3}
-        ref={ref}
-        style={{ minHeight: "100vh" }}
-        className="darkSection bg-[#111111] max-md:overflow-y-hidden text-white"
-      >
-        <div  className="parallaxContainer min-h-[300vh]  max-md:min-h-[250vh] relative flex items-center justify-around max-md:justify-center max-md:flex-col max-w-7xl mx-auto">
-          <div class="sticky top-[10%] h-[100vh] w-1/2 relative max-md:w-full max-md:top-[30%]   max-md:h-dvh">
-            <p id="about-us" className="text-[1.5rem] font-bold tracking-widest uppercase text-[#999] mb-4 ">
-              <span className="divider-line" />
-              {t('about.biography')}
-            </p>
-            <h2 className="display mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold">
-             {t('about.title')}
-            </h2>
-            <motion.div  className="aboutMeImgContainer m-4">
-              <motion.div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 flex items-center justify-start max-md:justify-center"
-              >
-                <div class="flex gap-8 ml-10  max-md:gap-4 max-md:ml-0">
-                  {/* العمود الأول */}
-                  <motion.div style={{ y: leftColumnY }} className="grid gap-6 max-md:gap-4">
-                    <div className="h-64 w-44 overflow-hidden rounded-lg grid gap-6">
-                      <img
-                        src={img3}
-                        className="h-full w-full object-cover"
-                        style={{ filter: "brightness(0.6) contrast(1.05)" }}
-                      />
-                    </div>
-                    <div className="h-64 w-44 overflow-hidden rounded-lg grid gap-6">
-                      <img
-                        src={img4}
-                        className="h-full w-full object-cover"
-                        style={{ filter: "brightness(0.6) contrast(1.05)" }}
-                      />
-                    </div>
-                  </motion.div>
 
-                  {/* العمود الثاني */}
-                  <motion.div
-                    style={{ y: centerColumnY }}
-                    className="grid gap-6 max-md:gap-4"
-                  >
-                    <div className="h-64 w-44 overflow-hidden rounded-lg">
-                      <img
-                        src={img1}
-                        className="h-full w-full object-cover "
-                        style={{ filter: "brightness(0.6) contrast(1.05)" }}
-                      />
-                    </div>
-                    <div className="h-64 w-44 overflow-hidden rounded-lg">
-                      <img
-                        src={img2}
-                        className="h-full w-full object-cover"
-                        style={{ filter: "brightness(0.6) contrast(1.05)" }}
-                      />
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
+    return (
+      <>
+        <section
           
-
-          <div className="content flex flex-col gap-[30vh] max-md:gap-[8vh] relative z-10">
-            <motion.div
-    style={{ y: firstBoxY, opacity: firstBoxOpacity }}
-    className="translate-y-[300px] min-h-[240px] h-auto w-full max-w-[600px] text-center max-md:mx-auto text-white"
-  >
-    <div className="text-3xl font-light">
-      {t('about.hello')}
-    </div>
-    <a
-      href="/cv.pdf"
-      download
-      className="inline-flex items-center gap-2 mt-8 px-6 py-3 border border-white/20 text-white text-sm tracking-[0.08em] uppercase font-medium rounded-md transition-all duration-300 hover:bg-white hover:text-[#111]"
+          data-index={3}
+          ref={ref}
+          style={{ minHeight: "100vh" }}
+          className="darkSection bg-[#111111] max-md:overflow-y-hidden text-white"
+        >
+          <div  className="parallaxContainer min-h-[300vh]  max-md:min-h-[250vh] relative flex items-center justify-around max-md:justify-center max-md:flex-col max-w-7xl mx-auto">
+            <div class="sticky top-[10%] h-[100vh] w-1/2 relative max-md:w-full max-md:top-[30%]   max-md:h-dvh">
+              <p id="about-us" className="text-[1.5rem] font-bold tracking-widest uppercase text-[#999] mb-4 ">
+                <span className="divider-line" />
+                {t('about.biography')}
+              </p>
+              <h2 className="display mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold">
+               {t('about.title')}
+              </h2>
+              <motion.div  className="aboutMeImgContainer m-4">
+                <motion.div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 flex items-center justify-start max-md:justify-center"
+                >
+                  <div class="flex gap-8 ml-10  max-md:gap-4 max-md:ml-0">
+                    {/* العمود الأول */}
+                    <motion.div style={{ y: leftColumnY }} className="grid gap-6 max-md:gap-4">
+                      <div className="h-64 w-44 overflow-hidden rounded-lg grid gap-6">
+                        <img
+                          src={img3}
+                          className="h-full w-full object-cover"
+                          style={{ filter: "brightness(0.6) contrast(1.05)" }}
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg grid gap-6">
+                        <img
+                          src={img4}
+                          className="h-full w-full object-cover"
+                          style={{ filter: "brightness(0.6) contrast(1.05)" }}
+                        />
+                      </div>
+                    </motion.div>
+  
+                    {/* العمود الثاني */}
+                    <motion.div
+                      style={{ y: centerColumnY }}
+                      className="grid gap-6 max-md:gap-4"
+                    >
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <img
+                          src={img1}
+                          className="h-full w-full object-cover "
+                          style={{ filter: "brightness(0.6) contrast(1.05)" }}
+                        />
+                      </div>
+                      <div className="h-64 w-44 overflow-hidden rounded-lg">
+                        <img
+                          src={img2}
+                          className="h-full w-full object-cover"
+                          style={{ filter: "brightness(0.6) contrast(1.05)" }}
+                        />
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+            
+  
+            <div className="content flex flex-col gap-[30vh] max-md:gap-[4vh] relative z-10">
+              <motion.div
+      style={{ y: firstBoxY, opacity: firstBoxOpacity }}
+      className="translate-y-[300px] min-h-[240px] h-auto w-full max-w-[600px] text-center max-md:mx-auto text-white"
     >
-      <i className="fa-solid fa-download text-xs" />
-      Download CV
-    </a>
-  </motion.div>
+      <div className="text-3xl max-md:text-2xl font-light">
+        {t('about.hello')}
+      </div>
+      <a
+        href={cvHref}
+        download
+        className="inline-flex items-center gap-2 mt-8 px-6 py-3 border border-white/20 text-white text-sm tracking-[0.08em] uppercase font-medium rounded-md transition-all duration-300 hover:bg-white hover:text-[#111]"
+      >
+        <i className="fa-solid fa-download text-xs" />
+        Download CV
+      </a>
+    </motion.div>
             <motion.div
               style={{ y: secondBoxY, opacity: secondBoxOpacity }}
               className="translate-y-[300px] min-h-[240px] h-auto w-full max-w-[600px] text-center max-md:mx-auto text-white"
             >
-              <div className="text-3xl font-light">
+              <div className="text-3xl max-md:text-2xl font-light">
                  {t('about.journey')}
               </div>
             </motion.div>
@@ -158,7 +159,7 @@ function Parallax2() {
               style={{ y: thirdBoxY, opacity: thirdBoxOpacity }}
               className="translate-y-[300px] min-h-[240px] h-auto w-full max-w-[600px] text-center max-md:mx-auto text-white"
             >
-              <div className="text-3xl font-light">
+              <div className="text-3xl max-md:text-2xl font-light">
                 {t('about.focus')}
               </div>
             </motion.div>
