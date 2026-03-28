@@ -69,7 +69,7 @@ const WavyBackground = () => {
   }, []);
 
   return (
-    <svg ref={svgRef} className="absolute inset-0 z-0 pointer-events-none opacity-[0.18] w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"></svg>
+    <svg ref={svgRef} className="hidden md:block absolute inset-0 z-0 pointer-events-none opacity-[0.18] w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"></svg>
   );
 };
 
