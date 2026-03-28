@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import WavyBackground from './WavyBackground';
 import img1Str from "../assets/first.png";
 import img2Str from "../assets/1212.png";
 
@@ -44,7 +45,8 @@ const Hero = () => {
   const maskSize = isHovered ? 480 : 0; 
 
   return (
-    <div className="absolute relative inset-0 flex items-center justify-center z-10">
+    <div className="absolute inset-0 flex items-center justify-center z-10">
+      <WavyBackground />
       <div 
         ref={containerRef}
         className="w-[900px] h-[100dvh] max-w-full relative overflow-hidden rounded-[4px] z-20"

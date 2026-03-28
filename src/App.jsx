@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomCursor from './components/Cursor';
 import Navbar from './components/Nav';
-import WavyBackground from './components/WavyBackground';
+
 import Hero from './components/HeroComponent';
 import Ticker from './components/Ticker';
 import Parallax1 from './parallax/parallax1';
@@ -37,7 +37,7 @@ const botWords = [
       <CustomCursor />
       <Navbar />
 
-      <WavyBackground />
+
       <section className="relative w-full h-[100vh]">
         <Hero />
         <Ticker topWords={topWords} botWords={botWords} />
