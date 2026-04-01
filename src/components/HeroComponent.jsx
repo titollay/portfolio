@@ -2,10 +2,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaFacebook, FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa';
 import WavyBackground from './WavyBackground';
+import Ticker from './Ticker';
+import { useLanguage } from '../context/LanguageContext';
 import img1Str from "../assets/first.png";
 import img2Str from "../assets/1212.png";
 
 const Hero = () => {
+  const { t } = useLanguage();
+  const topWords = [
+    t('hero.tagline') + ' ',
+    t('hero.webDev') + ' ',
+    t('hero.uxui') + ' ',
+    t('hero.branding') + ' ',
+    t('hero.marketingDigital') + ' '
+  ];
+
+  const botWords = [
+    t('hero.webDev') + ' ',
+    t('hero.uxui') + ' ',
+    t('hero.branding') + ' ',
+    t('hero.marketingDigital') + ' '
+  ];
+
   const containerRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -50,6 +68,7 @@ const Hero = () => {
   return (
     <div className="absolute inset-0 flex items-center justify-center z-10 bg-[#f3f3f3]">
       <WavyBackground />
+      <Ticker topWords={topWords} botWords={botWords} />
 
       {/* Mobile-Only Redesign Layout */}
       <div className="flex md:hidden flex-col items-center justify-center text-center px-6 w-full h-[100dvh] relative z-20">
@@ -98,13 +117,13 @@ const Hero = () => {
           className="flex flex-col items-center "
         >
           <h2 className="text-[#777] mt-10 font-black-han text-3xl uppercase tracking-tighter mb-1">
-            ALLAY
+            {t('hero.lastName')}
           </h2>
           <h1 className="text-black font-black-han text-5xl uppercase tracking-tighter leading-none mb-4">
-            TAHA
+            {t('hero.firstName')}
           </h1>
           <p className="text-black/60 font-averia text-lg font-medium">
-            I'm a Full Stack Developer
+            {t('hero.role')}
           </p>
         </motion.div>
 

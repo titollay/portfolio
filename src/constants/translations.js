@@ -13,6 +13,9 @@ export const translations = {
       uxui: "UX/UI DESIGN",
       branding: "BRANDING",
       marketingDigital: "DIGITAL MARKETING",
+      role: "I'm a Full Stack Developer",
+      firstName: "Taha",
+      lastName: "Allay",
     },
   
     projects: {
@@ -55,6 +58,9 @@ export const translations = {
       uxui: "UX/UI DESIGN",
       branding: "BRANDING",
       marketingDigital: "MARKETING DIGITAL",
+      role: "Je suis un Développeur Full Stack",
+      firstName: "Taha",
+      lastName: "Allay",
     },
   
   
@@ -81,6 +87,49 @@ export const translations = {
       getInTouch: "Contact",
       letsWork: "CRÉONS",
       together: "ENSEMBLE",
+    }
+  },
+  ar: {
+    nav: {
+      home: "الرئيسية",
+      about: "عني",
+      projects: "مشاريعي",
+      skills: "مهاراتي",
+      contact: "اتصل بي",
+    },
+    hero: {
+      tagline: "أقوم ببناء تجارب رقمية",
+      webDev: "تطوير الويب",
+      uxui: "تصميم واجهة وتجربة المستخدم",
+      branding: "الهوية البصرية",
+      marketingDigital: "التسويق الرقمي",
+      role: "مطور تطبيقات ويب متكامل",
+      firstName: "طه",
+      lastName: "علاي",
+    },
+    projects: {
+      title: "أعمال مختارة",
+    },
+    skills: {
+      title: "مهاراتي",
+      description: "التقنيات والأدوات التي أستخدمها لبناء منتجات رقمية حديثة وقابلة للتوسع.",
+    },
+    about: {
+      biography: "السيرة الذاتية",
+      title: "عني",
+      hello: "مرحباً، أنا طه، مطور ويب شغوف أستمتع ببناء تجارب رقمية حديثة ومبدعة للويب.",
+      journey: "رحلتي في التطوير مدفوعة بالفضول، وتعلم تقنيات جديدة، وتحويل الأفكار إلى حلول وظيفية وأنيقة.",
+      focus: "أركز على إنشاء تجارب مستخدم سلسة، وواجهات نظيفة، وأنظمة موثوقة تجعل التكنولوجيا بسيطة وممتعة في الاستخدام.",
+    },
+    parallax: {
+      welcome: "أهلاً بك",
+    },
+    footer: {
+      idea: "لديك فكرة؟",
+      buildTogether: "لنقم ببنائها معاً.",
+      getInTouch: "تواصل معي",
+      letsWork: "لنعمل",
+      together: "معاً",
     }
   }
 };

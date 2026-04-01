@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Cairo:wght@200..1000&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-black-han: "Black Han Sans", sans-serif;
   --font-averia: "Averia Serif Libre", serif;
+  --font-cairo: "Cairo", sans-serif;
   
   --animate-ticker-scroll: ticker-scroll 18s linear infinite;
   --animate-marquee: marquee 40s linear infinite;
@@ -35,6 +36,10 @@
     overflow-x: clip;
     font-family: var(--font-averia);
     
+  }
+
+  html[lang="ar"] body {
+    font-family: var(--font-cairo);
   }
 }
 

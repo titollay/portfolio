@@ -3,7 +3,6 @@ import CustomCursor from './components/Cursor';
 import Navbar from './components/Nav';
 
 import Hero from './components/HeroComponent';
-import Ticker from './components/Ticker';
 import Parallax1 from './parallax/parallax1';
 import SelectedWorks from './components/SelectedWorks';
 import Services from './components/Skils';
@@ -16,23 +15,9 @@ import Skills from './components/Skils';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 function AppContent() {
-  const { t } = useLanguage();
-  const topWords = [
-  t('hero.tagline') + ' ',
-  t('hero.webDev') + ' ',
-  t('hero.uxui') + ' ',
-  t('hero.branding') + ' ',
-  t('hero.marketingDigital') + ' '
-];
-
-const botWords = [
-  t('hero.webDev') + ' ',
-  t('hero.uxui') + ' ',
-  t('hero.branding') + ' ',
-  t('hero.marketingDigital') + ' '
-];
+  const { t, language } = useLanguage();
   return (
-    <>
+    <div dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <PageTransition />
       <CustomCursor />
       <Navbar />
@@ -40,7 +25,6 @@ const botWords = [
 
       <section className="relative w-full h-[100vh]">
         <Hero />
-        <Ticker topWords={topWords} botWords={botWords} />
       </section>
       <Parallax1 sectionName="Welcome" />
       <Parallax2 sectionName={"Parallax1"} />
@@ -48,7 +32,7 @@ const botWords = [
    <Skills/>
       <ImageMarquee />
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -13,19 +13,19 @@ const projects = [
     title: "ALLZY — E-COMMERCE",
     category: "WEB DESIGN / DEVELOPMENT",
     image: projectAllzy,
-    link: "https://github.com/titollay/allzy",
+    link: "https://allzy.gt.tc",
   },
   {
     title: "ALLZY — E-COMMERCE DASHBOARD",
     category: "ADMIN PANEL / MANAGEMENT",
     image: projectAllzyDash,
-    link: "https://github.com/titollay/allzy",
+    link: "https://allzy.gt.tc/login",
   },
   {
     title: "VETCARE — VETERINARY SYSTEM",
     category: "WEB APP / MANAGEMENT SYSTEM",
     image: projectVetcare,
-    link: "https://github.com/titollay/vetcare",
+    link: "https://vetcare.wuaze.com/vett/",
   },
   {
     title: "PULSECARE — MEDICAL PLATFORM",

@@ -149,6 +149,7 @@ export default function Nav({ className = "" }) {
                 >
                   <option value="en">EN</option>
                   <option value="fr">FR</option>
+                  <option value="ar">AR</option>
                 </select>
               </li>
             </ul>
@@ -210,6 +211,7 @@ export default function Nav({ className = "" }) {
                   >
                     <option value="en">EN</option>
                     <option value="fr">FR</option>
+                    <option value="ar">AR</option>
                   </select>
                 </div>
                 {navLinks.map((link, i) => (
