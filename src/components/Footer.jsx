@@ -38,7 +38,8 @@ export default function Footer() {
   return (
     <motion.footer
       id="contact"
-      className="w-full bg-[#f3f3f3] text-[#111] overflow-hidden relative z-[20] flex flex-col justify-between min-h-[80vh] px-[5vw] py-16"
+      className="w-full text-[#111] overflow-hidden relative z-[20] flex flex-col justify-between min-h-[80vh] px-[5vw] py-16"
+      style={{ backgroundColor: 'var(--bg)', color: 'var(--color-text)' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       initial={{ opacity: 0, y: 60 }}
@@ -69,7 +70,11 @@ export default function Footer() {
         <div className="relative w-40 h-40 flex items-center justify-center">
           <motion.div
             ref={buttonRef}
-            className="absolute w-32 h-32 rounded-full bg-[#111] text-[#f3f3f3] flex items-center justify-center cursor-pointer z-[30] shadow-2xl"
+            className="absolute w-32 h-32 rounded-full flex items-center justify-center cursor-pointer z-[30] shadow-2xl"
+            style={{ 
+              backgroundColor: 'var(--color-heading)',
+              color: 'var(--bg)'
+            }}
             animate={{ x: position.x, y: position.y }}
             whileHover={{ scale: 1.15 }}
             whileTap={{ scale: 0.9 }}

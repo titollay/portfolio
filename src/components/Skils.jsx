@@ -13,6 +13,7 @@ const skillCategories = [
       { name: "jQuery", icon: "fa-brands fa-js-square" },
       { name: "Bootstrap", icon: "fa-brands fa-bootstrap" },
       { name: "React", icon: "fa-brands fa-react" },
+      { name: "Next.js", icon: "fa-solid fa-arrow-up-right-from-square" },
       { name: "Vite", icon: "fa-solid fa-bolt" },
       { name: "TailwindCSS", icon: "fa-solid fa-wind" },
     ],
@@ -30,18 +31,22 @@ const skillCategories = [
   {
     title: "DATABASES",
     skills: [
-      { name: "SQL Server", icon: "fa-solid fa-database" },
+      { name: "PostgreSQL", icon: "fa-solid fa-database" },
       { name: "MySQL", icon: "fa-solid fa-database" },
+  
+      { name: "MongoDB", icon: "fa-solid fa-leaf" },
     ],
   },
   {
-    title: "DEVELOPMENT TOOLS",
+    title: "TOOLS & PLATFORMS",
     skills: [
       { name: "Git", icon: "fa-brands fa-git-alt" },
       { name: "GitHub", icon: "fa-brands fa-github" },
       { name: "GitLab", icon: "fa-brands fa-gitlab" },
       { name: "Jira", icon: "fa-brands fa-jira" },
       { name: "SonarQube", icon: "fa-solid fa-code" },
+      { name: "Prisma", icon: "fa-solid fa-cube" },
+      { name: "Supabase", icon: "fa-solid fa-cloud" },
     ],
   },
 ];
@@ -63,9 +68,10 @@ export default function Skills() {
         
         {/* Section Header */}
         <div className="mb-20">
-          <h2 className="text-[1.5rem] font-bold tracking-widest text-white/50 uppercase mb-4">
+          <p className="text-md uppercase tracking-[0.3em] text-[#888788] mb-4">
+             <span className="divider-line" />
             {t("skills.title")}
-          </h2>
+          </p>
 
           <p className="text-[clamp(1.5rem,3vw,3rem)] font-light leading-tight max-w-4xl">
             {t("skills.description")}

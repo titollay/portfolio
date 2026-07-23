@@ -2,51 +2,45 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useSpring } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 
-import projectAllzy from "../assets/mokkup.jpg";
-import projectVetcare from "../assets/vett.png";
-import projectPulsecare from "../assets/pulse.jpg";
-import projectBusway from "../assets/bus.jpg";
-import projectAllzyDash from "../assets/dash2.jpg";
+import projectAllzy from "../assets/mokkup.webp";
+import projectVetcare from "../assets/vett.webp";
+import projectMyCVForge from "../assets/mycvforge.webp";
+import projectBusway from "../assets/bus.webp";
+import projectAllzyDash from "../assets/dash2.webp";
+import projectAnalyseMed from "../assets/med.webp";
+import projectCRFR from "../assets/crfr.webp";
 
-const projects = [
-  {
-    title: "ALLZY — E-COMMERCE",
-    category: "WEB DESIGN / DEVELOPMENT",
-    image: projectAllzy,
-    link: "https://allzy.gt.tc",
-  },
-  {
-    title: "ALLZY — E-COMMERCE DASHBOARD",
-    category: "ADMIN PANEL / MANAGEMENT",
-    image: projectAllzyDash,
-    link: "https://allzy.gt.tc/login",
-  },
-  {
-    title: "VETCARE — VETERINARY SYSTEM",
-    category: "WEB APP / MANAGEMENT SYSTEM",
-    image: projectVetcare,
-    link: "https://vetcare.wuaze.com/vett/",
-  },
-  {
-    title: "PULSECARE — MEDICAL PLATFORM",
-    category: "WEB DESIGN / HEALTHCARE",
-    image: projectPulsecare,
-    link: "https://github.com/titollay/pulsecare",
-  },
-  {
-    title: "BUSWAY — BUS TRACKING APP",
-    category: "PRODUCT DESIGN / MOBILE & WEB",
-    image: projectBusway,
-    link: "https://github.com/titollay/busway",
-  },
+const PROJECT_LINKS = [
+  "https://allzy.gt.tc",
+  "https://allzy.gt.tc/login",
+  "https://vetcare.wuaze.com/vett/",
+  "https://mycvforge.vercel.app/",
+  "https://github.com/titollay/busway",
+  "https://github.com/titollay/crfr",
+  "https://github.com/titollay/analysemed",
+];
+
+const PROJECT_IMAGES = [
+  projectAllzy,
+  projectAllzyDash,
+  projectVetcare,
+  projectMyCVForge,
+  projectBusway,
+  projectCRFR,
+  projectAnalyseMed,
 ];
 
 export default function SelectedWorks() {
   const { t } = useLanguage();
-
   const [activeProject, setActiveProject] = useState(null);
-
   const containerRef = useRef(null);
+
+  const projectItems = t("projects.items") || [];
+  const projects = projectItems.map((item, i) => ({
+    ...item,
+    image: PROJECT_IMAGES[i],
+    link:  PROJECT_LINKS[i],
+  }));
 
   // Smooth cursor movement
   const mouseX = useSpring(0, { stiffness: 60, damping: 15 });
@@ -75,10 +69,11 @@ export default function SelectedWorks() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="relative w-full min-h-[100vh] bg-[#f3f3f3] text-[#111] py-24 flex flex-col justify-center px-[5vw] overflow-hidden"
+      className="relative w-full min-h-[100vh] text-[#111] py-24 flex flex-col justify-center px-[5vw] overflow-hidden"
+      style={{ backgroundColor: 'var(--bg)', color: 'var(--color-text)' }}
     >
       {/* Title */}
-      <div className="mb-16 border-b border-[#111]/20 pb-4">
+      <div className="mb-16 pb-4" style={{ borderBottom: '1px solid var(--color-border)' }}>
         <h2 className="text-[1.5rem] font-bold tracking-widest uppercase">
           {t("projects.title")}
         </h2>
@@ -98,9 +93,20 @@ export default function SelectedWorks() {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="group block relative flex flex-col md:flex-row md:items-center justify-between py-12 md:py-20 border-b border-[#111]/20 cursor-pointer transition-colors duration-500 hover:bg-[#111] hover:text-[#f3f3f3] px-8 -mx-8 gap-6 md:gap-0"
-            onMouseEnter={() => setActiveProject(index)}
-            onMouseLeave={() => setActiveProject(null)}
+            className="group block relative flex flex-col md:flex-row md:items-center justify-between py-12 md:py-20 cursor-pointer transition-colors duration-500 px-8 -mx-8 gap-6 md:gap-0 hover:text-white"
+            style={{ 
+              borderBottom: '1px solid var(--color-border)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#111';
+              e.currentTarget.style.color = '#f3f3f3';
+              setActiveProject(index);
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'transparent';
+              e.currentTarget.style.color = 'var(--color-text)';
+              setActiveProject(null);
+            }}
           >
             {/* Mobile Card Image */}
             <div className="md:hidden w-full aspect-[16/9] overflow-hidden rounded-xl mb-4 relative shadow-lg">
@@ -125,7 +131,7 @@ export default function SelectedWorks() {
 
       {/* Floating preview image (Desktop Only) */}
       <motion.div
-        className="hidden md:block absolute top-0 left-0 w-[420px] aspect-[4/3] pointer-events-none z-20 overflow-hidden rounded-xl shadow-2xl"
+        className="hidden md:block absolute top-0 left-0 w-[500px] aspect-[4/3] pointer-events-none z-20 overflow-hidden rounded-xl shadow-2xl"
         style={{
           x: mouseX,
           y: mouseY,
@@ -151,7 +157,7 @@ export default function SelectedWorks() {
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </motion.div>
         ))}

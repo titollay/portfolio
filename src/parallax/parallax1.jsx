@@ -39,7 +39,7 @@ export default function Parallax1({ sectionName }) {
   );
 
   return (
-    <div className="min-h-[100vh]  bg-[#F3F3F3] flex items-center justify-center relative py-[3rem] pb-[5rem]">
+    <div className="min-h-[100vh] flex items-center justify-center relative py-[3rem] pb-[5rem]" style={{ backgroundColor: 'var(--bg)' }}>
       <motion.div
         ref={ref}
         className="flex h-[250vh] font-[600] items-center justify-center"

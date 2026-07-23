@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import marquee1 from '../assets/marquee1.png';
-import marquee2 from '../assets/marquee2.png';
-import marquee3 from '../assets/marquee3.png';
+import marquee1 from '../assets/marquee1.webp';
+import marquee2 from '../assets/marquee2.webp';
+import marquee3 from '../assets/marquee3.webp';
 
 export default function ImageMarquee() {
   const images = [marquee1, marquee2, marquee3];

@@ -13,6 +13,7 @@ import Parallax2 from './parallax/Parallax2';
 import Skills from './components/Skils';
 
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 function AppContent() {
   const { t, language } = useLanguage();
@@ -22,14 +23,13 @@ function AppContent() {
       <CustomCursor />
       <Navbar />
 
-
       <section className="relative w-full h-[100vh]">
         <Hero />
       </section>
       <Parallax1 sectionName="Welcome" />
       <Parallax2 sectionName={"Parallax1"} />
       <SelectedWorks />
-   <Skills/>
+      <Skills/>
       <ImageMarquee />
       <Footer />
     </div>
@@ -38,11 +38,12 @@ function AppContent() {
 
 function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
-
-export default App; // Trigger HMR
+export default App;

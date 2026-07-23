@@ -1,253 +1,268 @@
-// import React from 'react';
-
-// const Nav = () => {
-//   return (
-//     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-7 py-5">
-//       <div className="font-black-han text-[15px] tracking-[0.02em] leading-[1.15] uppercase text-black cursor-none">
-//         <span className="block font-averia italic font-light text-[13px] tracking-[0.04em] normal-case">
-//           Taha        </span>
-//         <span className="block font-normal">Allay</span>
-//       </div>
-//       <div className="flex gap-2">
-//         <button className="font-black-han text-[11px] tracking-[0.08em] uppercase px-4 py-2 rounded-[100px] border-[1.5px] border-black bg-transparent text-black cursor-pointer transition-colors duration-200 hover:bg-[#777]">Original</button>
-//         <button className="font-black-han text-[11px] tracking-[0.08em] uppercase px-4 py-2 rounded-[100px] border-[1.5px] border-black bg-transparent text-black cursor-pointer transition-colors duration-200 hover:bg-[#777]">Remix</button>
-//         <button className="font-black-han text-[11px] tracking-[0.08em] uppercase px-4 py-2 rounded-[100px] border-[1.5px] border-black bg-black text-white cursor-pointer transition-colors duration-200 hover:bg-[#222]">Copy Component</button>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Nav;
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
-
+import { useTheme } from "../context/ThemeContext";
 
 const getNavLinks = (t) => [
-  { label: t('nav.home'), href: "/" },
-  { label: t('nav.about'), href: "/#about-us" },
-  { label: t('nav.projects'), href: "/#projects" },
-  { label: t('nav.skills'), href: "/#skills" },
-  { label: t('nav.contact'), href: "/#contact" },
+  { label: t('nav.home'),     href: "#home" },
+  { label: t('nav.about'),    href: "#about-us" },
+  { label: t('nav.projects'), href: "#projects" },
+  { label: t('nav.skills'),   href: "#skills" },
+  { label: t('nav.contact'),  href: "#contact" },
 ];
 
 export default function Nav({ className = "" }) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [langOpen,  setLangOpen]  = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { darkMode, toggleDarkMode } = useTheme();
 
   const navLinks = getNavLinks(t);
 
-  const handleLanguageChange = (e) => {
-    setLanguage(e.target.value);
-  };
-
+  /* ── scroll ── */
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* ── close mobile on resize ── */
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) setMenuOpen(false);
+    const onResize = () => { if (window.innerWidth >= 1024) setMenuOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  /* ── close lang dropdown on click outside ── */
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (langOpen && !e.target.closest('.lang-dropdown')) {
+        setLangOpen(false);
+      }
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [langOpen]);
 
+  /* ── helpers ── */
+  const LANGS = ["EN", "FR", "AR"];
 
-
-  
+  const textColor   = scrolled || darkMode ? "text-white"        : "text-black";
+  const borderColor = scrolled || darkMode ? "border-white/20"   : "border-black/20";
+  const hoverBg     = scrolled || darkMode ? "hover:bg-white/10" : "hover:bg-black/5";
 
   return (
     <>
-      <style>{`
-        .nav-root {
-          font-family: 'DM Sans', sans-serif;
-        }
-
-       
-
-        
-        .ham-line {
-          display: block;
-          width: 25px;
-          height: 2px;
-          background: #000;
-          transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-          transform-origin: center;
-        }
-
-        .mob-link {
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.75rem;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.65);
-          text-decoration: none;
-          padding: 14px 0;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
-          display: block;
-          transition: color 0.25s ease, padding-left 0.25s ease;
-        }
-
-        .mob-link:hover { color: #FC8C06; padding-left: 8px; }
-
-       
-
-        .lang-btn:hover {
-          background: #777;
-          border-color: #777;
-          color: #fff;
-        }
-
-        .lang-btn option {
-          background: #fff;
-          color: #000;
-        }
-      `}</style>
-
       <header
-       className={`
-  nav-root fixed top-0 left-0 w-full z-50 
-  transition-all duration-500 ease-[cubic-bezier(0.87,0,0.13,1)]
-  ${
-    scrolled
-      ? "bg-black/60 backdrop-blur-xl border-b border-white/5 text-white shadow-2xl"
-      : "bg-transparent text-black border-b border-transparent"
-  }
-  ${className}
-`}
+        className={`
+          fixed top-0 left-0 w-full z-50 transition-all duration-500
+          ${scrolled ? "bg-black/60 backdrop-blur-xl shadow-2xl border-b border-white/5" : "bg-transparent border-b border-transparent"}
+          ${className}
+        `}
       >
-        <div className="flex justify-between items-center px-6 sm:px-10 xl:px-14 py-4">
-          {/* Logo */}
-          <div className={`font-black-han text-[20px] tracking-[0.02em] leading-[1.15] uppercase text-black cursor-none  ${scrolled ? "text-white" : "text-black"}`}>
-            <span className="block font-averia italic font-light text-[16px] tracking-[0.04em] normal-case">
-              Taha        </span>
+        <div className="grid grid-cols-2 lg:grid-cols-3 items-center px-6 sm:px-10 xl:px-14 py-4">
+
+          {/* ── LEFT : Logo ── */}
+          <div className={`font-black-han text-[20px] tracking-[0.02em] leading-[1.15] uppercase cursor-default ${textColor}`}>
+            <span className="block font-averia italic font-light text-[15px] tracking-[0.04em] normal-case opacity-70">
+              Taha
+            </span>
             <span className="block font-normal">Allay</span>
           </div>
 
-          <nav className="hidden lg:block">
-            <ul className="flex flex-row items-center text-xs xl:text-sm 2xl:text-base md:text-xs gap-2 xl:gap-2 md:gap-4 sm:gap-3 text-shadow-2xs bold justify-around space-x-2">
+          {/* ── CENTER : Nav links (desktop) ── */}
+          <nav className="hidden lg:flex justify-center">
+            <ul className="flex items-center gap-1">
               {navLinks.map((link) => (
                 <li key={link.label}>
-                  <a href={link.href} className={`font-black-han text-[11px] tracking-[0.08em] uppercase px-4 py-2 rounded-[100px] border-[1.5px] border-black bg-transparent text-black cursor-pointer transition-colors duration-200 hover:bg-[#777]  ${
-          scrolled
-            ? "border-white/20 text-white hover:bg-white/10"
-            : "border-black text-black hover:bg-[#777]"
-        }`}>
+                  <a
+                    href={link.href}
+                    className={`
+                      font-black-han text-[11px] tracking-[0.08em] uppercase
+                      px-4 py-2 rounded-full border-[1.5px] transition-all duration-200
+                      ${textColor} ${borderColor} ${hoverBg}
+                    `}
+                  >
                     {link.label}
                   </a>
                 </li>
               ))}
-              <li>
-                <select 
-                  className=" font-black-han text-[11px] tracking-[0.08em] uppercase px-4 py-2 rounded-[100px] border-[1.5px] border-black bg-black text-white cursor-pointer transition-colors duration-200 hover:bg-[#222]" 
-                  value={language} 
-                  onChange={handleLanguageChange}
-                >
-                  <option value="en">EN</option>
-                  <option value="fr">FR</option>
-                  <option value="ar">AR</option>
-                </select>
-              </li>
             </ul>
           </nav>
 
-          
+          {/* ── RIGHT : Lang button + Dark mode + Hamburger ── */}
+          <div className="flex items-center justify-end gap-2">
 
-          {/* Hamburger */}
-          <button
-            className="lg:hidden  flex flex-col justify-center items-center gap-[5px] w-9 h-9 relative z-50"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span
-              className="ham-line "
-              style={{
-                transform: menuOpen
-                  ? "translateY(6.5px) rotate(45deg)"
-                  : "none",
-                background: menuOpen ? "#000" : undefined,
-              }}
-            />
-            <span
-              className="ham-line"
-              style={{
-                opacity: menuOpen ? 0 : 1,
-                transform: menuOpen ? "scaleX(0)" : "none",
-              }}
-            />
-            <span
-              className="ham-line"
-              style={{
-                transform: menuOpen
-                  ? "translateY(-6.5px) rotate(-45deg)"
-                  : "none",
-                background: menuOpen ? "#FC8C06" : undefined,
-              }}
-            />
-          </button>
+            {/* Language dropdown — desktop */}
+            <div className="relative lang-dropdown hidden lg:block">
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className={`
+                  inline-flex items-center justify-center gap-1
+                  font-black-han text-[11px] tracking-[0.1em] uppercase
+                  h-9 px-3 rounded-full border-[1.5px] transition-all duration-200
+                  ${textColor} ${borderColor} ${hoverBg}
+                `}
+              >
+                {language.toUpperCase()}
+                <svg 
+                  className={`w-3 h-3 transition-transform duration-200 ${langOpen ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              <AnimatePresence>
+                {langOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className={`
+                      absolute top-full right-0 mt-2 min-w-[80px]
+                      rounded-xl overflow-hidden
+                      backdrop-blur-xl shadow-xl
+                      ${scrolled || darkMode ? "bg-black/80 border border-white/10" : "bg-white/90 border border-black/10"}
+                    `}
+                  >
+                    {LANGS.map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang.toLowerCase());
+                          setLangOpen(false);
+                        }}
+                        className={`
+                          w-full px-4 py-2 text-left
+                          font-black-han text-[11px] tracking-[0.1em] uppercase
+                          transition-all duration-150
+                          ${language.toUpperCase() === lang 
+                            ? (scrolled || darkMode ? "bg-white/10 text-white" : "bg-black/5 text-black") 
+                            : (scrolled || darkMode ? "text-white/70 hover:bg-white/5 hover:text-white" : "text-black/70 hover:bg-black/5 hover:text-black")
+                          }
+                        `}
+                      >
+                        {lang}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Dark mode toggle — desktop */}
+            <button
+              onClick={() => toggleDarkMode()}
+              aria-label="Toggle dark mode"
+              className={`
+                hidden lg:inline-flex items-center justify-center
+                w-9 h-9 rounded-full border-[1.5px] transition-all duration-200
+                ${textColor} ${borderColor} ${hoverBg}
+              `}
+            >
+              {darkMode ? (
+                /* sun */
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+              ) : (
+                /* moon */
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                </svg>
+              )}
+            </button>
+
+            {/* Hamburger — mobile */}
+            <button
+              className="lg:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 relative z-50"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Toggle menu"
+            >
+              {[0, 1, 2].map((i) => (
+                <span
+                  key={i}
+                  className={`block w-[22px] h-[2px] transition-all duration-300 origin-center ${scrolled || menuOpen ? "bg-white" : "bg-black"}`}
+                  style={{
+                    transform:
+                      i === 0 && menuOpen ? "translateY(7px) rotate(45deg)"  :
+                      i === 2 && menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
+                    opacity: i === 1 && menuOpen ? 0 : 1,
+                  }}
+                />
+              ))}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* ── Mobile Menu ── */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
+              exit={{  opacity: 0, height: 0 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:hidden text-center overflow-hidden bg-black/50 backdrop-blur-xl border-t border-white/5"
+              className="lg:hidden overflow-hidden bg-black/80 backdrop-blur-xl border-t border-white/5"
             >
-              <div className="px-6 py-6">
-                <div className="mb-6 flex justify-center">
-                  <select 
-                    className="lang-btn !border-white !color-white" 
-                    value={language} 
-                    onChange={handleLanguageChange}
-                    style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
-                  >
-                    <option value="en">EN</option>
-                    <option value="fr">FR</option>
-                    <option value="ar">AR</option>
-                  </select>
-                </div>
+              <div className="px-6 py-6 space-y-1">
                 {navLinks.map((link, i) => (
-                  <motion.div
+                  <motion.a
                     key={link.label}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06, duration: 0.3 }}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1,  x: 0 }}
+                    transition={{ delay: i * 0.06 }}
+                    className="block py-3 border-b border-white/5 text-xs uppercase tracking-[0.18em] text-white/60 hover:text-white hover:pl-2 transition-all duration-200"
                   >
-                    <a
-                      href={link.href}
-                      className="mob-link"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {link.label}
-                    </a>
-                  </motion.div>
+                    {link.label}
+                  </motion.a>
                 ))}
 
+                {/* Mobile lang + dark */}
                 <motion.div
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ delay: navLinks.length * 0.06 + 0.05 }}
-                  className="pt-5 pb-2"
+                  className="pt-5 flex items-center gap-3"
                 >
-                  
+                  <div className="flex-1 flex gap-2">
+                    {LANGS.map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => setLanguage(lang.toLowerCase())}
+                        className={`flex-1 py-2.5 rounded-full border text-xs tracking-widest uppercase font-semibold transition-all ${
+                          language.toUpperCase() === lang 
+                            ? "bg-white text-black border-white" 
+                            : "border-white/20 text-white/60 hover:text-white hover:bg-white/10"
+                        }`}
+                      >
+                        {lang}
+                      </button>
+                    ))}
+                  </div>
 
-                  {/* <div className="relative group px-3 py-2 overflow-hidden rounded-lg border w-full text-center block border-orange-500 bg-transparent">
-                    <span className="absolute top-0 left-0 w-0 h-full bg-orange-500 transition-all duration-500 group-hover:w-full"></span>
-                    <a
-                      className="relative z-10 text-xs xl:text-sm shadow-2xl text-shadow-2xs w-full text-center block 2xl:text-base sm:text-sm text-[#FC8C06] font-semibold group-hover:text-white transition-colors"
-                      href=""
-                    >
-                      Shop Now
-                    </a>
-                  </div> */}
+                  <button
+                    onClick={() => toggleDarkMode()}
+                    className="w-11 h-11 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all flex-shrink-0"
+                  >
+                    {darkMode ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                      </svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                      </svg>
+                    )}
+                  </button>
                 </motion.div>
               </div>
             </motion.div>
@@ -257,5 +272,3 @@ export default function Nav({ className = "" }) {
     </>
   );
 }
-
-// ─────────────────────────────────────────────
